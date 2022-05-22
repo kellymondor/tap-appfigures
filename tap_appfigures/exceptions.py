@@ -9,26 +9,26 @@ class ReadTimeoutError(Exception):
 class Server5xxError(Exception):
     pass
 
-class LinkedInError(Exception):
+class AppfiguresError(Exception):
     pass
 
-class LinkedInBadRequestError(LinkedInError):
+class AppfiguresBadRequestError(AppfiguresError):
     pass
 
-class LinkedInForbiddenError(LinkedInError):
+class AppfiguresForbiddenError(AppfiguresError):
     pass
 
-class LinkedInNotFoundError(LinkedInError):
+class AppfiguresNotFoundError(AppfiguresError):
     pass
 
-class LinkedInTooManyRequestsError(LinkedInError):
+class AppfiguresTooManyRequestsError(AppfiguresError):
     pass
 
 ERROR_CODE_EXCEPTION_MAPPING = {
-    400: LinkedInBadRequestError,
-    403: LinkedInForbiddenError,
-    404: LinkedInNotFoundError,
-    429: LinkedInTooManyRequestsError
+    400: AppfiguresBadRequestError,
+    403: AppfiguresForbiddenError,
+    404: AppfiguresNotFoundError,
+    429: AppfiguresTooManyRequestsError
 }
 
 def get_exception_for_error_code(error_code):
@@ -54,6 +54,6 @@ def raise_for_error(response):
                 ex = get_exception_for_error_code(error_code)
                 raise ex(message)
             else:
-                raise LinkedInError(error)
+                raise AppfiguresError(error)
         except (ValueError, TypeError):
-            raise LinkedInError(error)
+            raise AppfiguresError(error)

@@ -1,6 +1,6 @@
 import requests
 from requests.exceptions import ConnectionError, Timeout
-from tap_appfigures.exceptions import raise_for_error, LinkedInError, ReadTimeoutError, Server5xxError, LinkedInTooManyRequestsError
+from tap_appfigures.exceptions import raise_for_error, AppfiguresError, ReadTimeoutError, Server5xxError, AppfiguresTooManyRequestsError
 
 import backoff
 import json
@@ -18,7 +18,7 @@ class AppfiguresClient():
     COMPANY_API = "data/profiles/developer"
 
     def __init__(self, config):
-        self.__cookie = "_ga=GA1.2.2114205037.1645753240; G_ENABLED_IDPS=google; G_AUTHUSER_H=0; _gid=GA1.2.665749090.1648483113; KSERVERID=a2b28ce56085a1d062fd4e99a4c33b8fe1042060; G_ENABLED_IDPS=google; G_AUTHUSER_H=0; _afm_session=cgdyLJZyLyJbwfwlXdCWaA.5jT4KVbHVtRXFY_3yXu1uQaBHAh_MnuHj2hvKTmXU-hEjUPjjy8IuC7GaHVJc9EhqzEE3svA_4ldvG9CGhHnHT3c4gRokoXnpwBjQJagNhR3hh6Lead58RHoMESme_42ea3_ypHjWSr0XXGs8HRz3vZgIkQJoKmEGO1EmsoxJPBM5FNpW0nvMb3JhzK1-_KBz8RJ7jtdaH4cpkIhsLnI8pIcZWRxvrsgieiIJf1ZFyCvx8hP4iL0fGf7ON7wQr_dzszN0YmLCJarqLBkbloCig.1648510556893.2592000000.hpXx9sV9nD-Wo9kZK520I1SCGDZLfPWB2Eu-hAS6BMM; crisp-client/session/8be82478-7316-42dc-b8d4-fb27fbdf055d=session_aabbf73e-ea0e-48e6-852e-5037cbf6d623; _gat=1"
+        self.__cookie = config.get("cookie")
         self.__verified = False
         self.__session = requests.Session()
 
@@ -35,12 +35,6 @@ class AppfiguresClient():
     def __headers(self):
         
         headers = {}
-        # headers["accept"] = "*/*"
-        # headers["accept-language"] = "en-US,en;q=0.9"
-        # headers["content-type"] = "application/x-www-form-urlencoded"
-        # headers["connection"] = "keep-alive"
-        # headers["origin"] = "https://explorer.appfigures.com"
-        # headers["referer"] = "https://explorer.appfigures.com/search"
         headers["cookie"] = self.__cookie
 
         return headers
@@ -92,7 +86,7 @@ class AppfiguresClient():
 
     @backoff.on_exception(
         backoff.expo,
-        (Server5xxError, ReadTimeoutError, ConnectionError, Timeout, LinkedInTooManyRequestsError),
+        (Server5xxError, ReadTimeoutError, ConnectionError, Timeout, AppfiguresTooManyRequestsError),
         max_tries=BACKOFF_MAX_TRIES_REQUEST,
         factor=10,
         logger=LOGGER)
@@ -123,7 +117,7 @@ class AppfiguresClient():
             return response
 
         except requests.exceptions.Timeout as err:
-            LOGGER.error(f'TIMEOUT ERROR: {error}')
+            LOGGER.error(f'TIMEOUT ERROR: {err}')
             raise ReadTimeoutError(err)
 
     def post_request(self, url, params=None, data=None, **kwargs):

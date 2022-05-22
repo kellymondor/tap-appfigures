@@ -1,15 +1,15 @@
 import singer
 from .base_stream import BaseStream
 from tap_appfigures.context import Context
-from tap_appfigures.exceptions import LinkedInNotFoundError
+from tap_appfigures.exceptions import AppfiguresNotFoundError
 
 LOGGER = singer.get_logger()
 
 class CompanyStream(BaseStream):
     stream_id = 'companies'
     stream_name = 'companies'
-    key_properties = ["developer_d"]
-    replication_key = "developer_d"
+    key_properties = ["developer_id"]
+    replication_key = "developer_id"
     count = 0
 
     def sync_records(self, **kwargs):
@@ -21,7 +21,7 @@ class CompanyStream(BaseStream):
             url = self.client.get_company_url(company_id)
             try:
                 record = self.client.get_request(url)
-            except LinkedInNotFoundError as e:
+            except AppfiguresNotFoundError as e:
                 LOGGER.info(e)
             
             additional_info = dict(record).get("additional_info", {})

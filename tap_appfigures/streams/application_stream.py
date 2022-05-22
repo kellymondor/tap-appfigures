@@ -22,8 +22,8 @@ class ApplicationStream(BaseStream):
             pass
     
     def sync_page(self, url, page_size, page_number):
-
-        max_updated_at = None
+            
+        max_updated_at = '2000-01-01T00:00:00'
     
         params = {"sort": "updated_date", "count": page_size, "page": page_number, "fields": "product_id,storefronts,type,stores_id,developer,developer_id,name,other_storefronts,us_price,all_rating,all_rating_count,active,categories.all,developer_email,countries,version_rating,version_rating_count,primary_description,developer_country,developer_site,devices,is_paid,categories.main,monetization_strategies,release_date,sdks,view_url,support_url,updated_date,version"}
         time_extracted = singer.utils.now()
