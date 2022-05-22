@@ -1,0 +1,267 @@
+{
+  "type": [
+    "null", 
+    "object"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "product_id": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "primary_description": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "all_rating_count": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "version_rating_count": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "type": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "monetization_strategies": {
+      "type": [
+        "null",
+        "array"
+      ],
+      "items": {
+        "type": [
+          "null",
+          "string"
+        ]
+      }
+    },
+    "sdks": {
+      "type": [
+        "null",
+        "array"
+      ],
+      "items": {
+        "type": [
+          "null",
+          "string"
+        ]
+      }
+    },
+    "all_rating": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "support_url": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "developer_email": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "storefronts": {
+      "type": [
+        "null",
+        "array"
+      ],
+      "items": {
+        "type": [
+          "null",
+          "string"
+        ]
+      }
+    },
+    "view_url": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "is_paid": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "developer_id": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "other_storefronts": {
+      "type": [
+        "null",
+        "array"
+      ],
+      "items": {
+        "type": [
+          "null",
+          "string"
+        ]
+      }
+    },
+    "developer_country": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "devices": {
+      "type": [
+        "null",
+        "array"
+      ],
+      "items": {
+        "type": [
+          "null",
+          "string"
+        ]
+      }
+    },
+    "active": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "countries": {
+      "type": [
+        "null",
+        "array"
+      ],
+      "items": {
+        "type": [
+          "null",
+          "string"
+        ]
+      }
+    },
+    "version": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "stores_id": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "version_rating": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "release_date": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time" 
+    },
+    "developer_site": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "name": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "all_sdks": {
+      "type": [
+        "null",
+        "array"
+      ],
+      "items": {
+        "type": [
+          "null",
+          "object"
+        ],
+        "properties": {
+          "found_on": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "active": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "id": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "tags": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          },
+          "removed_on": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "us_price": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "developer": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "updated_date": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    }
+  }
+}

@@ -1,0 +1,2 @@
+import tap_appfigures.streams.company_stream
+import tap_appfigures.streams.application_stream
