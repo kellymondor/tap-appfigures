@@ -164,7 +164,7 @@
     "stores_id": {
       "type": [
         "null",
-        "integer"
+        "string"
       ]
     },
     "version_rating": {
