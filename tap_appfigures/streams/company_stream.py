@@ -2,6 +2,7 @@ import singer
 from .base_stream import BaseStream
 from tap_appfigures.context import Context
 from tap_appfigures.exceptions import AppfiguresNotFoundError
+from multiprocessing import Pool
 
 LOGGER = singer.get_logger()
 
@@ -19,6 +20,7 @@ class CompanyStream(BaseStream):
         for company_id in company_ids:
             time_extracted = singer.utils.now()
             url = self.client.get_company_url(company_id)
+            
             try:
                 record = self.client.get_request(url)
             except AppfiguresNotFoundError as e:
@@ -39,7 +41,7 @@ class CompanyStream(BaseStream):
                 "name": name if name else company_info.get("name", None),
                 "legal_name": company_info.get("legal_name", None),
                 "domain": company_info.get("domain", None),
-                "domain_aliases": company_info.get("domain_aliases", None),
+                "domain_aliases": company_info.get("domain_aliases", []),
                 "street_number": location.get("street_number", None),
                 "street_name": location.get("street_name", None),
                 "city": location.get("city", None),
@@ -58,7 +60,6 @@ class CompanyStream(BaseStream):
                 "twitter_id": twitter.get("id", None),
                 "facebook_handle": facebook.get("handle", None),
                 "timezone": company_info.get("timezone", None)
-                
             }
   
             self.write_record(record, time_extracted=time_extracted)

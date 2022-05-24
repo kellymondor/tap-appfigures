@@ -2,8 +2,149 @@
     "type": ["null", "object"],
     "additionalProperties": true,
     "properties": {
-      "id": {
-        "type": ["null", "integer"]
+      "developer_id": {
+        "type": [
+          "null", 
+          "integer"
+        ]
+      },
+      "name": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "legal_name": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "domain": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "domain_aliases": {
+        "type": [
+          "null",
+          "array"
+        ],
+        "items": {
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      },
+      "street_number": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "street_name": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "city": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "state": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "country": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "zipcode": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "employee_count": {
+        "type": [
+          "null",
+          "integer"
+        ]
+      },
+      "employee_count_range": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "annual_revenue": {
+        "type": [
+          "null",
+          "integer"
+        ]
+      },
+      "estimated_annual_revenue": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "industry": {
+        "type": [
+          "null",
+          "integer"
+        ]
+      },
+      "industry_group": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "description": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "linkedin_handle": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "twitter_handle": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "twitter_id": {
+        "type": [
+          "null",
+          "integer"
+        ]
+      },
+      "facebook_handle": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "timzeon": {
+        "type": [
+          "null",
+          "string"
+        ]
       }
   }
 }
