@@ -101,7 +101,7 @@
       "industry": {
         "type": [
           "null",
-          "integer"
+          "string"
         ]
       },
       "industry_group": {
