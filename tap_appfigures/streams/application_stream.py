@@ -4,7 +4,8 @@ from tap_appfigures.context import Context
 
 LOGGER = singer.get_logger()
 
-PAGE_SIZE = 500
+PAGE_SIZE = 25
+FIELDS = "product_id,storefronts,type,stores_id,developer,developer_id,name,other_storefronts,us_price,all_rating,all_rating_count,active,categories.all,developer_email,countries,version_rating,version_rating_count,primary_description,developer_country,developer_site,devices,is_paid,categories.main,monetization_strategies,release_date,sdks,view_url,support_url,updated_date,version"
 
 class ApplicationStream(BaseStream):
     stream_id = 'applications'
@@ -25,7 +26,7 @@ class ApplicationStream(BaseStream):
             
         max_updated_at = '2000-01-01T00:00:00'
     
-        params = {"sort": "updated_date", "count": page_size, "page": page_number, "fields": "product_id,storefronts,type,stores_id,developer,developer_id,name,other_storefronts,us_price,all_rating,all_rating_count,active,categories.all,developer_email,countries,version_rating,version_rating_count,primary_description,developer_country,developer_site,devices,is_paid,categories.main,monetization_strategies,release_date,sdks,view_url,support_url,updated_date,version"}
+        params = {"fields": FIELDS, "sort": "updated_date", "count": page_size, "page": page_number}
         time_extracted = singer.utils.now()
         
         response = self.client.post_request(url, params = params)

@@ -13,12 +13,13 @@ BACKOFF_MAX_TRIES_REQUEST = 5
 
 class AppfiguresClient():
 
-    BASE_URL = "https://explorer.appfigures.com"
-    APPLICATION_API = "api/appbase/products"
-    COMPANY_API = "data/profiles/developer"
+    BASE_URL = "https://appfigures.com/market/explorer/_u/data"
+    APPLICATION_API = "explorer_search"
+    COMPANY_API = "profiles/developer"
 
     def __init__(self, config):
         self.__cookie = config.get("cookie")
+        self.__x_rt = config.get("x-rt")
         self.__verified = False
         self.__session = requests.Session()
 
@@ -35,7 +36,24 @@ class AppfiguresClient():
     def __headers(self):
         
         headers = {}
+        headers["accept"] = "*/*"
+        headers["accept-language"] = "en-US,en;q=0.9"
+        headers["connection"] = "keep-alive"
         headers["cookie"] = self.__cookie
+        headers["origin"] = "https://appfigures.com"
+        headers["referer"] = "https://appfigures.com/market/explorer"
+        headers["referrer-policy"] = "strict-origin-when-cross-origin"
+        headers["sec-fest-dest"] = "empty"
+        headers["sec-fest-mode"] = "cors"
+        headers["sec-fest-site"] = "same-origin"
+        headers["user-agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36"
+        headers["dpr"] = "1"
+        headers["sec-ch-ua"] = '"Google Chrome";v="107", "Chromium";v="107", "Not=A?Brand";v="24"'
+        headers["sec-ch-ua-mobile"] = "70"
+        headers["sec-ch-ua-platform"] = '"macOS"'
+        headers["viewport-width"] = "546"
+        headers["x-rt"] = self.__x_rt
+        headers["x-requested-with"] = "XMLHttpRequest"
 
         return headers
 
@@ -43,8 +61,6 @@ class AppfiguresClient():
 
         data = {}
         data["q"] = '["and",["and",["or",["nested","all_sdks",["and",["match","all_sdks.id",["and","apollo"]],["match","all_sdks.active",true]]]]]]' 
-
-        # '["and",["and",["match","updated_date",["range","2022-05-05T00:00:00",null]],["or",["nested","all_sdks",["and",["match","all_sdks.id",["and","apollo"]],["match","all_sdks.active",true]]]]]]'
         
         return data
     
@@ -57,8 +73,9 @@ class AppfiguresClient():
     def get_application_search_url(self):
 
         url = f"{self.BASE_URL}/{self.APPLICATION_API}"
-        
+
         return url
+        
     
     @backoff.on_exception(
         backoff.expo,
@@ -129,7 +146,7 @@ class AppfiguresClient():
                                             url=url,
                                             params=params,
                                             data=self.__data(),
-                                            # headers=self.__headers(),
+                                            headers=self.__headers(),
                                             **kwargs)
 
         response_json = response.json()
